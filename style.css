@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: black;
+}
+
+#container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#game {
+    position: relative;
+    display: inline-grid;
+    background: black;
+}
+
+.square {
+  display: block;
+}
+
+.empty {
+  background: black;
+}
+
+.wall {
+  border: 1px solid blue;
+}
+
+.pill {
+  background: white;
+  border: 8px solid black;
+  border-radius: 50%;
+}
+
+.power-pill {
+  background: white;
+  border: 5px solid black;
+  border-radius: 50%;
+}
+
+.ghost-lair {
+  border: 1px solid red;
+}
