@@ -15,10 +15,13 @@ function gameLoop() {
 
     if (gb.classExists(pacman.pos, CLASSES[2])) {
         gb.removeClasses(pacman.pos, [CLASSES[2]])
+        gb.dots--
+        gb.updateScore(10)
     }
 
     if (gb.classExists(pacman.pos, CLASSES[3])) {
         gb.removeClasses(pacman.pos, [CLASSES[3]])
+        gb.updateScore(20)
     }
 
     if (gb.classExists(pacman.pos, CLASSES[5])) {
@@ -33,7 +36,10 @@ function gameLoop() {
         gb.addClasses(393, [CLASSES[7]])
     }
 
-    window.requestAnimationFrame(gameLoop)
+    if (gb.dots != 0) {
+        window.requestAnimationFrame(gameLoop)
+    }
+
 }
 
 window.requestAnimationFrame(gameLoop)

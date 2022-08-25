@@ -4,6 +4,8 @@ export class Board {
     constructor(DOMGrid) {
         this.grid = []
         this.DOMGrid = DOMGrid
+        this.dots = 0
+        this.score = 0
     }
 
     initBoard(layout) {
@@ -17,7 +19,17 @@ export class Board {
             div.style.cssText = `width: 20px; height: 20px;`
             this.DOMGrid.appendChild(div)
             this.grid.push(div)
+
+            if (s === 2) {
+                this.dots++
+            }
         })
+
+        const container = document.querySelector('#container')
+        const scoreDiv = document.createElement('div')
+        scoreDiv.classList.add('score')
+        scoreDiv.innerText = `Score: ${this.score}`
+        container.appendChild(scoreDiv)
     }
 
     removeClasses(pos, classes) {
@@ -41,6 +53,12 @@ export class Board {
             this.addClasses(nextPos, classAdd)
             char.setPos(nextPos)
         }
+    }
+
+    updateScore(x) {
+        this.score += x
+        const scoreDiv = document.querySelector('.score')
+        scoreDiv.innerText = `Score: ${this.score}`
     }
 
     static createBoard(DOMGrid, layout) {
