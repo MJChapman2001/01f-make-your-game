@@ -28,6 +28,21 @@ export class Board {
         this.grid[pos].classList.add(...classes)
     }
 
+    classExists(pos, _class) {
+        return this.grid[pos].classList.contains(_class)
+    }
+
+    moveChar(char) {
+        if(char.shouldMove()) {
+            const { nextPos, direction } = char.nextMove(this.classExists.bind(this))
+            const { classRem, classAdd } = char.move()
+
+            this.removeClasses(char.pos, classRem)
+            this.addClasses(nextPos, classAdd)
+            char.setPos(nextPos)
+        }
+    }
+
     static createBoard(DOMGrid, layout) {
         const b = new this(DOMGrid)
         b.initBoard(layout)

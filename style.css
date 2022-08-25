@@ -47,3 +47,26 @@ body {
 .ghost-lair {
   border: 1px solid red;
 }
+
+.pacman {
+  background: yellow;
+  border: none;
+  border-radius: 50%;
+  clip-path: polygon(
+    0 0,
+    20px 0,
+    20px -5px,
+    8px 10px,
+    20px 25px,
+    20px 20px,
+    0 20px
+  );
+}
+
+.portal-left {
+  background: black;
+}
+
+.portal-right {
+  background: black;
+}
