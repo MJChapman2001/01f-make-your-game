@@ -25,7 +25,7 @@ export class Ghost {
         let nextPos = this.pos + this.dir
         const keys = Object.keys(DIR)
 
-        while (classExists(nextPos, CLASSES[1]) || classExists(nextPos, CLASSES[8]) || classExists(nextPos, CLASSES[4])) {
+        while (classExists(nextPos, CLASSES[1]) || classExists(nextPos, CLASSES[4])) {
             const randDir = keys[Math.floor(Math.random() * keys.length)]
             this.dir = DIR[randDir]
             nextPos = this.pos + this.dir

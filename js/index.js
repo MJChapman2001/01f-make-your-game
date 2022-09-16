@@ -8,10 +8,10 @@ const gb = Board.createBoard(g, LAYOUT)
 const pacman = new Pacman(8, 657)
 
 const ghosts = [
-    new Ghost(5, 317, 'blinky'),
-    new Ghost(4, 326, 'pinky'),
-    new Ghost(3, 485, 'inky'),
-    new Ghost(2, 494, 'clyde')
+    new Ghost(11, 317, 'blinky'),
+    new Ghost(10, 326, 'pinky'),
+    new Ghost(9, 485, 'inky'),
+    new Ghost(8, 494, 'clyde')
 ]
 
 document.addEventListener('keydown', (e) => {
