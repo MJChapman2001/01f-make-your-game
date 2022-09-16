@@ -1,10 +1,18 @@
 import { LAYOUT, CLASSES } from './constants.js'
 import { Board } from './board.js'
 import { Pacman } from './pacman.js'
+import { Ghost } from './ghosts.js'
 
 const g = document.querySelector('#game')
 const gb = Board.createBoard(g, LAYOUT)
 const pacman = new Pacman(8, 657)
+
+const ghosts = [
+    new Ghost(5, 317, 'blinky'),
+    new Ghost(4, 326, 'pinky'),
+    new Ghost(3, 485, 'inky'),
+    new Ghost(2, 494, 'clyde')
+]
 
 document.addEventListener('keydown', (e) => {
     pacman.handleKey(e, gb.classExists.bind(gb))
@@ -12,6 +20,8 @@ document.addEventListener('keydown', (e) => {
 
 function gameLoop() {
     gb.moveChar(pacman)
+
+    ghosts.forEach((ghost) => gb.moveChar(ghost))
 
     if (gb.classExists(pacman.pos, CLASSES[2])) {
         gb.removeClasses(pacman.pos, [CLASSES[2]])

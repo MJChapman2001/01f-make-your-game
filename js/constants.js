@@ -51,12 +51,13 @@ export const CLASSES = [
     'ghost-lair',
     'portal-left',
     'portal-right',
-    'pacman'
+    'pacman',
+    'ghost'
 ]
 
 export const DIR = {
-    37: -1,
-    38: -28,
-    39: 1,
-    40: 28
+    37: -1, // left
+    38: -28, // up
+    39: 1, // right
+    40: 28 // down
 }
