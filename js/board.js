@@ -16,6 +16,8 @@ export class Board {
         layout.forEach((s) => {
             const div = document.createElement('div')
             div.classList.add("square", CLASSES[s])
+            if (s == 8) {div.classList.add(CLASSES[2])}
+            if (s == 9) {div.classList.add(CLASSES[0])}
             div.style.cssText = `width: 20px; height: 20px;`
             this.DOMGrid.appendChild(div)
             this.grid.push(div)

@@ -31,12 +31,30 @@ export class Ghost {
             nextPos = this.pos + this.dir
         }
 
+        if (classExists(this.pos, CLASSES[8]) || classExists(this.pos, CLASSES[9])) {
+            let randDir = keys[Math.floor(Math.random() * keys.length)]
+            this.dir = DIR[randDir]
+            nextPos = this.pos + this.dir
+            
+            while (classExists(nextPos, CLASSES[1]) || classExists(nextPos, CLASSES[4])) {
+                randDir = keys[Math.floor(Math.random() * keys.length)]
+                this.dir = DIR[randDir]
+                nextPos = this.pos + this.dir
+            }
+        }
+
+        if (classExists(nextPos, CLASSES[5])) {
+            nextPos = 418
+        } else if (classExists(nextPos, CLASSES[6])) {
+            nextPos = 393
+        }
+
         return { nextPos, direction: this.dir }
     }
 
     move() {
-        const classRem = [CLASSES[8], this.name]
-        const classAdd = [CLASSES[8], this.name]
+        const classRem = [CLASSES[10], this.name]
+        const classAdd = [CLASSES[10], this.name]
 
         return { classRem, classAdd }
     }

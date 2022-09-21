@@ -25,6 +25,10 @@ export class Pacman {
 
         if (classExists(nextPos, CLASSES[1]) || classExists(nextPos, CLASSES[4])) {
             nextPos = this.pos
+        } else if (classExists(nextPos, CLASSES[5])) {
+            nextPos = 418
+        } else if (classExists(nextPos, CLASSES[6])) {
+            nextPos = 393
         }
 
         return { nextPos, direction: this.dir }

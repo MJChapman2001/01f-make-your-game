@@ -34,18 +34,6 @@ function gameLoop() {
         gb.updateScore(20)
     }
 
-    if (gb.classExists(pacman.pos, CLASSES[5])) {
-        gb.removeClasses(pacman.pos, [CLASSES[7]])
-        pacman.pos = 418
-        gb.addClasses(418, [CLASSES[7]])
-    }
-
-    if (gb.classExists(pacman.pos, CLASSES[6])) {
-        gb.removeClasses(pacman.pos, [CLASSES[7]])
-        pacman.pos = 393
-        gb.addClasses(393, [CLASSES[7]])
-    }
-
     if (gb.dots != 0) {
         window.requestAnimationFrame(gameLoop)
     }
