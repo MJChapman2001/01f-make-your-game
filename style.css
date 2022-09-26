@@ -50,13 +50,12 @@ body {
 
 .ghost {
   position: relative;
-  border-radius: 10px, 10px, 2px, 2px;
+  border-radius: 50%;
   border: none;
 }
 
 .ghost::before {
   content: '';
-  display: block;
   position: absolute;
   width: 3px;
   height: 3px;
@@ -69,7 +68,6 @@ body {
 
 .ghost::after {
   content: '';
-  display: block;
   position: absolute;
   width: 3px;
   height: 3px;
