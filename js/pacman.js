@@ -2,6 +2,7 @@ import { CLASSES, DIR } from "./constants.js"
 
 export class Pacman {
     constructor(speed, start) {
+        this.start = start
         this.pos = start
         this.speed = speed
         this.time = 0

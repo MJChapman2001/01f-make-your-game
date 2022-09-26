@@ -23,6 +23,20 @@ function gameLoop() {
 
     ghosts.forEach((ghost) => gb.moveChar(ghost))
 
+    if (gb.classExists(pacman.pos, CLASSES[10]) && gb.ghostScared == false) {
+        gb.removeClasses(pacman.pos, [CLASSES[7]])
+        ghosts.forEach((ghost) => gb.removeClasses(ghost.pos, [CLASSES[10], ghost.name]))
+        gb.lives -= 1
+        gb.updateLives()
+
+        if (gb.lives >= 1) {
+            pacman.setPos(pacman.start)
+            ghosts.forEach((ghost) => ghost.pos = ghost.start)
+        } else {
+            return
+        }
+    }
+
     if (gb.classExists(pacman.pos, CLASSES[2])) {
         gb.removeClasses(pacman.pos, [CLASSES[2]])
         gb.dots--
