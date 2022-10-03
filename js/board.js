@@ -32,6 +32,7 @@ export class Board {
         const container = document.querySelector('#container')
         const scoreDiv = document.createElement('div')
         const livesDiv = document.createElement('div')
+        const timeDiv = document.createElement('div')
 
         scoreDiv.classList.add('score')
         scoreDiv.innerText = `Score: ${this.score}`
@@ -40,6 +41,10 @@ export class Board {
         livesDiv.classList.add('lives')
         livesDiv.innerText = `Lives: ${this.lives}`
         container.appendChild(livesDiv)
+
+        timeDiv.classList.add('time')
+        timeDiv.innerText = `00:00`
+        container.appendChild(timeDiv)
     }
 
     removeClasses(pos, classes) {
@@ -74,6 +79,17 @@ export class Board {
     updateLives() {
         const livesDiv = document.querySelector('.lives')
         livesDiv.innerText = `Lives: ${this.lives}`
+    }
+
+    updateTime(t) {
+        var sec = Math.floor((t / 1000) % 60)
+        var min = Math.floor((t / (1000 * 60)) % 60)
+
+        min = (min < 10) ? "0" + min : min
+        sec = (sec < 10) ? "0" + sec : sec
+
+        const timeDiv = document.querySelector('.time')
+        timeDiv.innerText = `${min}:${sec}`
     }
 
     static createBoard(DOMGrid, layout) {

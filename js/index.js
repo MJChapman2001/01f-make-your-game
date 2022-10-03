@@ -3,13 +3,24 @@ import { Board } from './board.js'
 import { Pacman } from './pacman.js'
 import { Ghost } from './ghosts.js'
 
-var g, gb, pacman, ghosts
+var g, gb, pacman, ghosts, startTime, scaredTime
 
 window.addEventListener('keypress', (e) => {
     if (e.code === 'KeyS') startGame()
 })
 
-function gameLoop() {
+function gameLoop(currTime) {
+
+    var currTime = currTime || new Date().getTime()
+    var runTime = currTime - startTime
+    gb.updateTime(runTime)
+
+    if (gb.ghostScared) {
+        if ((currTime - scaredTime) > 5000) {
+            gb.ghostScared = false
+        }
+    }
+
     gb.moveChar(pacman)
 
     ghosts.forEach((ghost) => gb.moveChar(ghost))
@@ -53,10 +64,13 @@ function gameLoop() {
         gb.removeClasses(pacman.pos, [CLASSES[3]])
         gb.updateScore(20)
         gb.ghostScared = true
+        scaredTime = currTime
     }
 
     if (gb.dots != 0) {
-        window.requestAnimationFrame(gameLoop)
+        window.requestAnimationFrame(function(currTime) {
+            gameLoop(currTime)
+        })
     }
 
 }
@@ -80,5 +94,8 @@ function startGame() {
         pacman.handleKey(e, gb.classExists.bind(gb))
     })
 
-    window.requestAnimationFrame(gameLoop)
+    window.requestAnimationFrame(function(currTime) {
+        startTime = currTime || new Date().getTime()
+        gameLoop(currTime)
+    })
 }
