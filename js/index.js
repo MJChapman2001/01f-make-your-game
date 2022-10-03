@@ -9,6 +9,23 @@ window.addEventListener('keypress', (e) => {
     if (e.code === 'KeyS') startGame()
 })
 
+let isPaused = false;
+let pausedTime
+let unPausedTime
+
+window.addEventListener("keydown", (e) => {
+    if (e.keyCode === 80 && isPaused === false) {
+        isPaused = true;
+        pausedTime = new Date()
+    } else if (e.keyCode === 80 && isPaused === true) {
+        isPaused = false;
+        window.requestAnimationFrame(function () {
+            unPausedTime = new Date()
+            gameLoop(unPausedTime-pausedTime);
+        });
+    }
+});
+
 function gameLoop(currTime) {
 
     var currTime = currTime || new Date().getTime()
