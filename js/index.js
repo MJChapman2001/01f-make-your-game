@@ -5,23 +5,21 @@ import { Ghost } from './ghosts.js'
 
 var g, gb, pacman, ghosts, startTime, scaredTime
 
-window.addEventListener('keypress', (e) => {
-    if (e.code === 'KeyS') startGame()
-})
+window.addEventListener('keypress', handleStart, true)
 
 let isPaused = false;
-let pausedTime
-let unPausedTime
+let pausedTime, unPausedTime
 
-window.addEventListener("keydown", (e) => {
-    if (e.keyCode === 80 && isPaused === false) {
+window.addEventListener("keypress", (e) => {
+    if (e.code === 'KeyP' && isPaused === false) {
         isPaused = true;
-        pausedTime = new Date()
-    } else if (e.keyCode === 80 && isPaused === true) {
+        pausedTime = new Date().getTime()
+    } else if (e.code === 'KeyP' && isPaused === true) {
         isPaused = false;
+        unPausedTime = new Date().getTime()
         window.requestAnimationFrame(function () {
-            unPausedTime = new Date()
-            gameLoop(unPausedTime-pausedTime);
+            startTime += (unPausedTime - pausedTime)
+            gameLoop();
         });
     }
 });
@@ -84,7 +82,7 @@ function gameLoop(currTime) {
         scaredTime = currTime
     }
 
-    if (gb.dots != 0) {
+    if (gb.dots != 0 && !isPaused) {
         window.requestAnimationFrame(function(currTime) {
             gameLoop(currTime)
         })
@@ -93,6 +91,8 @@ function gameLoop(currTime) {
 }
 
 function startGame() {
+    window.removeEventListener('keypress', handleStart, true)
+
     const h = document.querySelector('#header-div')
     h.innerText = 'Pacman'
 
@@ -115,4 +115,8 @@ function startGame() {
         startTime = currTime || new Date().getTime()
         gameLoop(currTime)
     })
+}
+
+function handleStart(e) {
+    if (e.code === 'KeyS') startGame()
 }
