@@ -10,19 +10,8 @@ window.addEventListener('keypress', handleStart, true)
 let isPaused = false;
 let pausedTime, unPausedTime
 
-window.addEventListener("keypress", (e) => {
-    if (e.code === 'KeyP' && isPaused === false) {
-        isPaused = true;
-        pausedTime = new Date().getTime()
-    } else if (e.code === 'KeyP' && isPaused === true) {
-        isPaused = false;
-        unPausedTime = new Date().getTime()
-        window.requestAnimationFrame(function () {
-            startTime += (unPausedTime - pausedTime)
-            gameLoop();
-        });
-    }
-});
+var playMsg = `Use the arrow keys to change direction.\nPress 'Space' to pause.`
+var pauseMsg = `Press 'Space' to unpause.\nPress 'R' to restart.`
 
 function gameLoop(currTime) {
 
@@ -92,9 +81,10 @@ function gameLoop(currTime) {
 
 function startGame() {
     window.removeEventListener('keypress', handleStart, true)
+    window.addEventListener('keypress', pauseGame)
 
     const h = document.querySelector('#header-div')
-    h.innerText = 'Pacman'
+    h.innerText = playMsg
 
     g = document.querySelector('#game')
     gb = Board.createBoard(g, LAYOUT)
@@ -119,4 +109,65 @@ function startGame() {
 
 function handleStart(e) {
     if (e.code === 'KeyS') startGame()
+}
+
+function pauseGame(e) {
+    const t = document.querySelector('#title-div')
+    const h = document.querySelector('#header-div')
+
+    if (e.code === 'Space' && isPaused === false) {
+        isPaused = true;
+        pausedTime = new Date().getTime()
+
+        t.innerText = 'Paused'
+        h.innerText = pauseMsg
+
+        document.addEventListener('keypress', restartGame, true)
+    } else if (e.code === 'Space' && isPaused === true) {
+        isPaused = false;
+        unPausedTime = new Date().getTime()
+
+        t.innerText = 'Pacman'
+        h.innerText = playMsg
+
+        window.requestAnimationFrame(function () {
+            startTime += (unPausedTime - pausedTime)
+            gameLoop();
+        });
+    }
+}
+
+function restartGame(e) {
+    if (e.code === 'KeyR') {
+        gb.removeClasses(pacman.pos, [CLASSES[7]])
+        ghosts.forEach((g) => {
+            gb.removeClasses(g.pos, [CLASSES[10], g.name])
+        })
+
+        gb.dots = 0
+        gb.lives = 3
+        gb.score = 0
+        gb.initBoard(LAYOUT)
+
+        pacman.setPos(pacman.start)
+        pacman.dir = null
+        ghosts.forEach((g) => {
+            g.setPos(g.start)
+        })
+
+        document.removeEventListener('keypress', restartGame, true)
+
+        isPaused = false
+
+        const t = document.querySelector('#title-div')
+        const h = document.querySelector('#header-div')
+
+        t.innerText = 'Pacman'
+        h.innerText = playMsg
+
+        window.requestAnimationFrame(function(currTime) {
+            startTime = currTime || new Date().getTime()
+            gameLoop(currTime)
+        })
+    }
 }

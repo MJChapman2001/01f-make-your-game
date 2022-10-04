@@ -30,19 +30,35 @@ export class Board {
         })
 
         const container = document.querySelector('#container')
-        const scoreDiv = document.createElement('div')
-        const livesDiv = document.createElement('div')
-        const timeDiv = document.createElement('div')
+        var scoreDiv, livesDiv, timeDiv
 
-        scoreDiv.classList.add('score')
+        if (document.querySelector('.score') === null) {
+            scoreDiv = document.createElement('div')
+            scoreDiv.classList.add('score')
+        } else {
+            scoreDiv = document.querySelector('.score')
+        }
+
+        if (document.querySelector('.lives') === null) {
+            livesDiv = document.createElement('div')
+            livesDiv.classList.add('lives')
+        } else {
+            livesDiv = document.querySelector('.lives')
+        }
+
+        if (document.querySelector('.time') === null) {
+            timeDiv = document.createElement('div')
+            timeDiv.classList.add('time')
+        } else {
+            timeDiv = document.querySelector('.time')
+        }
+
         scoreDiv.innerText = `Score: ${this.score}`
         container.appendChild(scoreDiv)
 
-        livesDiv.classList.add('lives')
         livesDiv.innerText = `Lives: ${this.lives}`
         container.appendChild(livesDiv)
 
-        timeDiv.classList.add('time')
         timeDiv.innerText = `00:00`
         container.appendChild(timeDiv)
     }

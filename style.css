@@ -12,11 +12,9 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-#header-div {
   color: white;
   font-size: 35px;
+  text-align: center; 
 }
 
 #game {
@@ -120,19 +118,4 @@ body {
 
 .portal-right {
   background: black;
-}
-
-.score {
-  color: white;
-  font-size: 35px;
-}
-
-.lives {
-  color: white;
-  font-size: 35px;
-}
-
-.time {
-  color: white;
-  font-size: 35px;
 }
