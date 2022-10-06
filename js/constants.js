@@ -73,10 +73,3 @@ export const ROTATION = {
     '1': 0,
     '28': 90
 }
-
-export const COLOURS = {
-    'blinky': 'red',
-    'pinky': 'pink',
-    'inky': 'cyan',
-    'clyde': 'orange'
-}

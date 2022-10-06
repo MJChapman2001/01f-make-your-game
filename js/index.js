@@ -1,4 +1,4 @@
-import { LAYOUT, CLASSES, COLOURS } from './constants.js'
+import { LAYOUT, CLASSES } from './constants.js'
 import { Board } from './board.js'
 import { Pacman } from './pacman.js'
 import { Ghost } from './ghosts.js'
