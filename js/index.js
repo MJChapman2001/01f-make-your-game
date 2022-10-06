@@ -121,6 +121,11 @@ function handleStart(e) {
 
 function pauseGame(e) {
     if (e.code === 'Space' && isPaused === false) {
+        g.style.opacity = '0.5'
+        document.querySelector('.score').style.opacity = '0'
+        document.querySelector('.lives').style.opacity = '0'
+        document.querySelector('.time').style.opacity = '0'
+
         isPaused = true;
         pausedTime = new Date().getTime()
 
@@ -129,6 +134,11 @@ function pauseGame(e) {
 
         document.addEventListener('keypress', restartGame, true)
     } else if (e.code === 'Space' && isPaused === true) {
+        g.style.opacity = '1'
+        document.querySelector('.score').style.opacity = '1'
+        document.querySelector('.lives').style.opacity = '1'
+        document.querySelector('.time').style.opacity = '1'
+
         isPaused = false;
         unPausedTime = new Date().getTime()
 
@@ -144,6 +154,11 @@ function pauseGame(e) {
 
 function restartGame(e) {
     if (e.code === 'KeyR') {
+        g.style.opacity = '1'
+        document.querySelector('.score').style.opacity = '1'
+        document.querySelector('.lives').style.opacity = '1'
+        document.querySelector('.time').style.opacity = '1'
+
         gb.removeClasses(pacman.pos, [CLASSES[7]])
         ghosts.forEach((g) => {
             gb.removeClasses(g.pos, [CLASSES[10], g.name])
@@ -177,6 +192,11 @@ function restartGame(e) {
 function gameOver() {
     document.addEventListener('keypress', restartGame, true)
 
+    g.style.opacity = '0'
+    document.querySelector('.score').style.opacity = '0'
+    document.querySelector('.lives').style.opacity = '0'
+    document.querySelector('.time').style.opacity = '0'
+
     t.innerText = (gb.dots == 0) ? 'Congratulations' : 'Game Over'
-    h.innerText = `Press 'R' to play again!`
+    h.innerText = `Final score: ${gb.score}\nPress 'R' to play again!`
 }
