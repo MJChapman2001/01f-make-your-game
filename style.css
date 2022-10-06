@@ -97,6 +97,10 @@ body {
   background: orange;
 }
 
+.scared {
+  background: darkblue;
+}
+
 .pacman {
   background: yellow;
   border: none;

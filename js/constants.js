@@ -56,7 +56,8 @@ export const CLASSES = [
     'pacman',
     'pill-junc',
     'empty-junc',
-    'ghost'
+    'ghost',
+    'scared'
 ]
 
 export const DIR = {
@@ -71,4 +72,11 @@ export const ROTATION = {
     '-28': 270,
     '1': 0,
     '28': 90
+}
+
+export const COLOURS = {
+    'blinky': 'red',
+    'pinky': 'pink',
+    'inky': 'cyan',
+    'clyde': 'orange'
 }

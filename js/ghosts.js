@@ -8,6 +8,7 @@ export class Ghost {
         this.dir = DIR[39]
         this.speed = speed
         this.time = 0
+        this.scared = false
         this.rotation = false
     }
 
@@ -54,8 +55,14 @@ export class Ghost {
     }
 
     move() {
-        const classRem = [CLASSES[10], this.name]
-        const classAdd = [CLASSES[10], this.name]
+        var classRem, classAdd
+        if (this.scared) {
+            classRem = [CLASSES[10], 'scared']
+            classAdd = [CLASSES[10], 'scared']
+        } else {
+            classRem = [CLASSES[10], this.name]
+            classAdd = [CLASSES[10], this.name]
+        }
 
         return { classRem, classAdd }
     }

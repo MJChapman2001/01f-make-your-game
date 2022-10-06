@@ -1,4 +1,4 @@
-import { LAYOUT, CLASSES } from './constants.js'
+import { LAYOUT, CLASSES, COLOURS } from './constants.js'
 import { Board } from './board.js'
 import { Pacman } from './pacman.js'
 import { Ghost } from './ghosts.js'
@@ -25,6 +25,11 @@ function gameLoop(currTime) {
     if (gb.ghostScared) {
         if ((currTime - scaredTime) > 5000) {
             gb.ghostScared = false
+
+            ghosts.forEach((g) => {
+                g.scared = false
+                gb.removeClasses(g.pos, ['scared'])
+            })
         }
     }
 
@@ -73,6 +78,11 @@ function gameLoop(currTime) {
         gb.updateScore(20)
         gb.ghostScared = true
         scaredTime = currTime
+
+        ghosts.forEach((g) => {
+            g.scared = true
+            gb.removeClasses(g.pos, [g.name])
+        })
     }
 
     if (gb.dots != 0 && !isPaused) {
