@@ -65,3 +65,10 @@ export const DIR = {
     39: 1, // right
     40: 28 // down
 }
+
+export const ROTATION = {
+    '-1': 180,
+    '-28': 270,
+    '1': 0,
+    '28': 90
+}

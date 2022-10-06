@@ -8,6 +8,7 @@ export class Pacman {
         this.time = 0
         this.dir = null
         this.power = false
+        this.rotation = true
     }
 
     shouldMove() {

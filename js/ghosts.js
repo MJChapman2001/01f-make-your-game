@@ -8,6 +8,7 @@ export class Ghost {
         this.dir = DIR[39]
         this.speed = speed
         this.time = 0
+        this.rotation = false
     }
 
     shouldMove() {

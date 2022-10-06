@@ -10,6 +10,9 @@ window.addEventListener('keypress', handleStart, true)
 let isPaused = false;
 let pausedTime, unPausedTime
 
+const t = document.querySelector('#title-div')
+const h = document.querySelector('#header-div')
+
 var playMsg = `Use the arrow keys to change direction.\nPress 'Space' to pause.`
 var pauseMsg = `Press 'Space' to unpause.\nPress 'R' to restart.`
 
@@ -44,6 +47,7 @@ function gameLoop(currTime) {
             gb.addClasses(pacman.pos, [CLASSES[7]])
             ghosts.forEach((ghost) => ghost.pos = ghost.start)
         } else {
+            gameOver()
             return
         }
     }
@@ -77,13 +81,17 @@ function gameLoop(currTime) {
         })
     }
 
+    if (gb.dots === 0) {
+        gameOver()
+        return
+    }
+
 }
 
 function startGame() {
     window.removeEventListener('keypress', handleStart, true)
     window.addEventListener('keypress', pauseGame)
 
-    const h = document.querySelector('#header-div')
     h.innerText = playMsg
 
     g = document.querySelector('#game')
@@ -112,9 +120,6 @@ function handleStart(e) {
 }
 
 function pauseGame(e) {
-    const t = document.querySelector('#title-div')
-    const h = document.querySelector('#header-div')
-
     if (e.code === 'Space' && isPaused === false) {
         isPaused = true;
         pausedTime = new Date().getTime()
@@ -159,9 +164,6 @@ function restartGame(e) {
 
         isPaused = false
 
-        const t = document.querySelector('#title-div')
-        const h = document.querySelector('#header-div')
-
         t.innerText = 'Pacman'
         h.innerText = playMsg
 
@@ -170,4 +172,11 @@ function restartGame(e) {
             gameLoop(currTime)
         })
     }
+}
+
+function gameOver() {
+    document.addEventListener('keypress', restartGame, true)
+
+    t.innerText = (gb.dots == 0) ? 'Congratulations' : 'Game Over'
+    h.innerText = `Press 'R' to play again!`
 }

@@ -1,4 +1,4 @@
-import { CLASSES } from './constants.js'
+import { CLASSES, ROTATION } from './constants.js'
 
 export class Board {
     constructor(DOMGrid) {
@@ -75,10 +75,19 @@ export class Board {
         return this.grid[pos].classList.contains(_class)
     }
 
+    rotate(pos, deg) {
+        this.grid[pos].style.transform = `rotate(${deg}deg)`
+    }
+
     moveChar(char) {
         if(char.shouldMove()) {
             const { nextPos, direction } = char.nextMove(this.classExists.bind(this))
             const { classRem, classAdd } = char.move()
+
+            if (char.rotation && nextPos !== char.pos) {
+                this.rotate(nextPos, ROTATION[`${char.dir}`])
+                this.rotate(char.pos, 0)
+            }
 
             this.removeClasses(char.pos, classRem)
             this.addClasses(nextPos, classAdd)
