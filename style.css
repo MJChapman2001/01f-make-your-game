@@ -3,7 +3,7 @@
 }
 
 body {
-  background: black;
+  background: rgb(73, 73, 73);
 }
 
 #container {
@@ -21,7 +21,7 @@ body {
     position: relative;
     display: inline-grid;
     background: black;
-    border: 1px solid blue;
+    border: 10px solid black;
     opacity: 0;
 }
 
