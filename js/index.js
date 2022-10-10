@@ -176,15 +176,27 @@ function restartGame(e) {
             gb.removeClasses(g.pos, [CLASSES[10], g.name])
         })
 
+        if (gb.ghostScared) {
+            gb.ghostScared = false
+
+            ghosts.forEach((g) => {
+                g.scared = false
+                gb.removeClasses(g.pos, ['scared'])
+            })
+        }
+
         gb.dots = 0
         gb.lives = 3
         gb.score = 0
         gb.initBoard(LAYOUT)
 
+        g.style.opacity = '1'
+
         pacman.setPos(pacman.start)
         pacman.dir = null
         ghosts.forEach((g) => {
             g.setPos(g.start)
+            gb.addClasses(g.pos, [CLASSES[10], g.name])
         })
 
         document.removeEventListener('keypress', restartGame, true)
