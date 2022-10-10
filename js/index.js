@@ -60,7 +60,7 @@ function gameLoop(currTime) {
     if (gb.classExists(pacman.pos, CLASSES[10]) && gb.ghostScared == true) {
         const eaten = ghosts.filter((ghost) => ghost.pos === pacman.pos)
         eaten.forEach((ghost) => {
-            gb.removeClasses(pacman.pos, [CLASSES[10], ghost.name])
+            gb.removeClasses(pacman.pos, [CLASSES[10], ghost.name, 'scared'])
             ghost.pos = ghost.start
             ghost.time = 0
             gb.updateScore(50)
@@ -107,6 +107,8 @@ function startGame() {
     g = document.querySelector('#game')
     gb = Board.createBoard(g, LAYOUT)
     pacman = new Pacman(8, 657)
+
+    g.style.opacity = '1'
 
     ghosts = [
         new Ghost(11, 317, 'blinky'),

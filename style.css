@@ -21,6 +21,8 @@ body {
     position: relative;
     display: inline-grid;
     background: black;
+    border: 1px solid blue;
+    opacity: 0;
 }
 
 .square {
