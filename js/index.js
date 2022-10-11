@@ -134,9 +134,9 @@ function handleStart(e) {
 function pauseGame(e) {
     if (e.code === 'Space' && isPaused === false) {
         g.style.opacity = '0.5'
-        document.querySelector('.score').style.opacity = '0'
-        document.querySelector('.lives').style.opacity = '0'
-        document.querySelector('.time').style.opacity = '0'
+        document.querySelector('.score').style.opacity = '0.5'
+        document.querySelector('.lives').style.opacity = '0.5'
+        document.querySelector('.time').style.opacity = '0.5'
 
         isPaused = true;
         pausedTime = new Date().getTime()
@@ -157,9 +157,11 @@ function pauseGame(e) {
         t.innerText = 'Pacman'
         h.innerText = playMsg
 
-        window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(function (currTime) {
             startTime += (unPausedTime - pausedTime)
-            gameLoop();
+            scaredTime += (unPausedTime - pausedTime)
+
+            gameLoop(currTime);
         });
     }
 }
@@ -178,6 +180,7 @@ function restartGame(e) {
 
         if (gb.ghostScared) {
             gb.ghostScared = false
+            scaredTime = null
 
             ghosts.forEach((g) => {
                 g.scared = false
