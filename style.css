@@ -3,7 +3,7 @@
 }
 
 body {
-  background: rgb(73, 73, 73);
+  background: black;
 }
 
 #container {
@@ -22,7 +22,7 @@ body {
     position: relative;
     display: inline-grid;
     background: black;
-    border: 10px solid black;
+    border: 5px solid white;
     opacity: 0;
 }
 
@@ -45,7 +45,7 @@ body {
 }
 
 .power-pill {
-  background: white;
+  background: red;
   border: 5px solid black;
   border-radius: 50%;
 }
