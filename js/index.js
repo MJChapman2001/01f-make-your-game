@@ -173,19 +173,9 @@ function restartGame(e) {
         document.querySelector('.lives').style.opacity = '1'
         document.querySelector('.time').style.opacity = '1'
 
-        gb.removeClasses(pacman.pos, [CLASSES[7]])
-        ghosts.forEach((g) => {
-            gb.removeClasses(g.pos, [CLASSES[10], g.name])
-        })
-
         if (gb.ghostScared) {
             gb.ghostScared = false
             scaredTime = null
-
-            ghosts.forEach((g) => {
-                g.scared = false
-                gb.removeClasses(g.pos, ['scared'])
-            })
         }
 
         gb.dots = 0
